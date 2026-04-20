@@ -4,6 +4,7 @@ import Link from "next/link"
 import { ArrowRight, Check, Copy } from "lucide-react"
 import { useState } from "react"
 
+import Beams from "@/components/Beams"
 import { Button } from "@/components/ui/button"
 
 export function Home() {
@@ -23,8 +24,20 @@ export function Home() {
   }
 
   return (
-    <section id="home" className="bg-black">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 pb-20 pt-16 sm:px-6 lg:grid-cols-[1.2fr_0.8fr] lg:px-8 lg:pt-24">
+    <section id="home" className="relative overflow-hidden bg-black">
+      <div className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2">
+        <Beams
+          lightColor="#ffffff"
+          beamWidth={3}
+          beamHeight={30}
+          beamNumber={20}
+          speed={2}
+          noiseIntensity={1.75}
+          scale={0.3}
+          rotation={-90}
+        />
+      </div>
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-4 pb-20 pt-16 sm:px-6 lg:grid-cols-[1.2fr_0.8fr] lg:px-8 lg:pt-24">
         <div>
           <h1 className="max-w-4xl text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl">
             I&apos;m Aditya Maurya
