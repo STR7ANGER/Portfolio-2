@@ -33,7 +33,7 @@ export default function RootLayout({
         inter.variable
       )}
     >
-      <body>{children}</body>
+      <body className="bg-black text-foreground">{children}</body>
     </html>
   )
 }

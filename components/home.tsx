@@ -23,11 +23,8 @@ export function Home() {
   }
 
   return (
-    <section
-      id="home"
-      className="mx-auto max-w-7xl px-4 pb-20 pt-16 sm:px-6 lg:px-8 lg:pt-24"
-    >
-      <div className="grid items-center gap-12 lg:grid-cols-[1.2fr_0.8fr]">
+    <section id="home" className="bg-black">
+      <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 pb-20 pt-16 sm:px-6 lg:grid-cols-[1.2fr_0.8fr] lg:px-8 lg:pt-24">
         <div>
           <h1 className="max-w-4xl text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl">
             I&apos;m Aditya Maurya
