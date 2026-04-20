@@ -24,7 +24,10 @@ export function Home() {
   }
 
   return (
-    <section id="home" className="relative overflow-hidden bg-black">
+    <section
+      id="home"
+      className="relative min-h-svh overflow-hidden bg-black"
+    >
       <div className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2">
         <Beams
           lightColor="#ffffff"
@@ -37,7 +40,7 @@ export function Home() {
           rotation={-90}
         />
       </div>
-      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-4 pb-20 pt-16 sm:px-6 lg:grid-cols-[1.2fr_0.8fr] lg:px-8 lg:pt-24">
+      <div className="relative z-10 mx-auto grid min-h-svh max-w-7xl items-center gap-12 px-4 pb-16 pt-24 sm:px-6 lg:grid-cols-[1.2fr_0.8fr] lg:px-8 lg:pb-20 lg:pt-28">
         <div>
           <h1 className="max-w-4xl text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl">
             I&apos;m Aditya Maurya
