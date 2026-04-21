@@ -1,22 +1,12 @@
 import {
   Briefcase,
   Cake,
-  ChefHat,
-  Gamepad2,
   GraduationCap,
-  Guitar,
   Landmark,
   MapPin,
   MonitorSmartphone,
-  MoveHorizontal,
-  Palette,
   Rocket,
   School,
-  ShieldEllipsis,
-  Sparkles,
-  Table2,
-  Trophy,
-  Waves,
 } from "lucide-react"
 
 const birthday = {
@@ -25,22 +15,19 @@ const birthday = {
   year: 2005,
 }
 
-const hobbies = [
-  { label: "Chess", icon: ShieldEllipsis },
-  { label: "Gaming", icon: Gamepad2 },
-  { label: "Swimming", icon: Waves },
-  { label: "Cafe hopping", icon: Landmark },
-  { label: "Cooking", icon: ChefHat },
-  { label: "Guitar", icon: Guitar },
-] as const
-
-const sports = [
-  { label: "Badminton", icon: Trophy },
-  { label: "Pickleball", icon: MoveHorizontal },
-  { label: "Paddle", icon: Palette },
-  { label: "Table tennis", icon: Table2 },
-  { label: "Football", icon: ShieldEllipsis },
-  { label: "Basketball", icon: Sparkles },
+const hobbiesAndSports = [
+  "Chess",
+  "Gaming",
+  "Swimming",
+  "Cafe hopping",
+  "Cooking",
+  "Guitar",
+  "Badminton",
+  "Pickleball",
+  "Paddle",
+  "Table tennis",
+  "Football",
+  "Basketball",
 ] as const
 
 function getCurrentAge() {
@@ -180,38 +167,12 @@ export function About() {
           <div className="rounded-[2rem] border border-white/10 bg-zinc-950/90 p-6 shadow-2xl shadow-black/30 xl:col-span-2">
             <div className="flex items-center gap-3">
               <School className="size-5 text-cyan-300" />
-              <div className="text-sm font-medium text-white">Hobbies</div>
+              <div className="text-sm font-medium text-white">Hobbies & Sports</div>
             </div>
-            <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {hobbies.map((hobby) => (
-                <div
-                  key={hobby.label}
-                  className="rounded-2xl border border-white/10 bg-zinc-900/80 p-4"
-                >
-                  <hobby.icon className="size-5 text-cyan-300" />
-                  <div className="mt-3 text-sm font-medium text-zinc-200">
-                    {hobby.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="rounded-[2rem] border border-white/10 bg-zinc-950/90 p-6 shadow-2xl shadow-black/30 xl:col-span-2">
-            <div className="flex items-center gap-3">
-              <Sparkles className="size-5 text-cyan-300" />
-              <div className="text-sm font-medium text-white">Sports</div>
-            </div>
-            <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {sports.map((sport) => (
-                <div
-                  key={sport.label}
-                  className="rounded-2xl border border-white/10 bg-zinc-900/80 p-4"
-                >
-                  <sport.icon className="size-5 text-cyan-300" />
-                  <div className="mt-3 text-sm font-medium text-zinc-200">
-                    {sport.label}
-                  </div>
+            <div className="mt-6 grid gap-2 sm:grid-cols-2">
+              {hobbiesAndSports.map((item) => (
+                <div key={item} className="text-sm font-medium text-zinc-200">
+                  - {item}
                 </div>
               ))}
             </div>
