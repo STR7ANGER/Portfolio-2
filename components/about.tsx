@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Briefcase,
   Cake,
@@ -8,6 +10,7 @@ import {
   Rocket,
   School,
 } from "lucide-react"
+import DarkVeil from "@/components/DarkVeil"
 
 const birthday = {
   day: 28,
@@ -49,8 +52,21 @@ export function About() {
   const age = getCurrentAge()
 
   return (
-    <section id="about" className="bg-black">
-      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+    <section id="about" className="relative overflow-hidden bg-black">
+      <div className="pointer-events-none absolute inset-0 opacity-90 mix-blend-screen blur-[0.5px]">
+        <DarkVeil
+          noiseIntensity={0.12}
+          scanlineIntensity={0.35}
+          scanlineFrequency={3}
+          warpAmount={0.85}
+          speed={1.15}
+          resolutionScale={1.2}
+          tint={1}
+          tintColor="#ffffff"
+        />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mb-10 max-w-3xl">
           <h2 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">
             Me in a bento

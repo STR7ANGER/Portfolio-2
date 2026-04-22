@@ -45,11 +45,11 @@ export function Home() {
           <h1 className="max-w-4xl text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl">
             I&apos;m Aditya Maurya
           </h1>
-          <div className="mt-5 text-lg font-medium text-zinc-200 sm:text-xl">
+          <div className="mt-5 text-lg font-medium text-zinc-100 sm:text-xl">
             Full-stack developer building clean products, strong backends, and
             scalable cloud systems.
           </div>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-zinc-400 sm:text-lg">
+          <p className="mt-6 max-w-2xl text-base leading-8 text-gray-300 sm:text-lg">
             I focus on web apps that feel sharp in the UI and solid under the hood,
             with experience across product engineering, deployment workflows, and
             real-world shipping.

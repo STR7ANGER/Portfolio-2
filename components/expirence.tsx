@@ -1,9 +1,26 @@
 import { experiences } from "@/components/portfolio-data"
+import LightPillar from "@/components/LightPillar"
+import { ShineBorder } from "@/components/ui/shine-border"
 
 export function Expirence() {
   return (
-    <section id="experience" className="bg-black">
-      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+    <section id="experience" className="relative overflow-hidden bg-black">
+      <div className="pointer-events-none absolute inset-0 opacity-45">
+        <LightPillar
+          topColor="#ffffff"
+          bottomColor="#ffffff"
+          intensity={0.2}
+          glowAmount={0.008}
+          noiseIntensity={0.08}
+          rotationSpeed={2}
+          quality="medium"
+          pillarWidth={3.8}
+          pillarHeight={0.5}
+          pillarRotation={90}
+          mixBlendMode="screen"
+        />
+      </div>
+      <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mb-10 max-w-3xl">
           <h2 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">
             Where I&apos;ve been shipping
@@ -17,9 +34,15 @@ export function Expirence() {
           {experiences.map((experience) => (
             <div
               key={`${experience.company}-${experience.role}`}
-              className="flex h-full flex-col rounded-[2rem] border border-white/10 bg-zinc-950/90 p-5 shadow-2xl shadow-black/30 lg:p-6"
+              className="relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-zinc-950/90 p-5 shadow-2xl shadow-black/30 lg:p-6"
             >
-              <div className="flex flex-col gap-4">
+              <ShineBorder
+                shineColor={["#ffffff"]}
+                borderWidth={1}
+                duration={12}
+              />
+
+              <div className="relative z-10 flex flex-col gap-4">
                 <div>
                   <div className="text-[11px] uppercase tracking-[0.2em] text-zinc-500">
                     {experience.location}
@@ -34,7 +57,7 @@ export function Expirence() {
                 </div>
               </div>
 
-              <div className="mt-5 rounded-2xl border border-white/10 bg-zinc-900/80 p-4">
+              <div className="relative z-10 mt-5 rounded-2xl border border-white/10 bg-zinc-900/80 p-4">
                 <div className="space-y-2.5">
                   {experience.bullets.slice(0, 3).map((bullet) => (
                     <div

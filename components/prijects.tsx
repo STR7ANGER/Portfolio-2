@@ -1,11 +1,76 @@
+import Image from "next/image"
 import { ExternalLink } from "lucide-react"
 
-import { projects } from "@/components/portfolio-data"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+
+const projects = [
+  {
+    name: "Taskmorpher",
+    image: "/taskmorpher.png",
+    description: "Productivity workspace with task tracking and collaboration.",
+    source: "#",
+    live: "#",
+  },
+  {
+    name: "Job Portal",
+    image: "/jobprotal.png",
+    description: "Job listing and hiring workflow platform for recruiters and candidates.",
+    source: "#",
+    live: "#",
+  },
+  {
+    name: "Virtual Venture",
+    image: "/virtualventure.png",
+    description: "Virtual business and trading simulator with live-style interactions.",
+    source: "#",
+    live: "#",
+  },
+  {
+    name: "Tech UI",
+    image: "/techui.png",
+    description: "Reusable UI components and design system for modern web apps.",
+    source: "#",
+    live: "#",
+  },
+  {
+    name: "Learning HAbits",
+    image: "/learninghabit.png",
+    description: "Learning tracker focused on consistency, streaks, and progress insights.",
+    source: "#",
+    live: "#",
+  },
+  {
+    name: "Bloomify",
+    image: "/bloomify.png",
+    description: "Growth-focused app experience with clean UX and engagement flows.",
+    source: "#",
+    live: "#",
+  },
+]
+
+function GitHubIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      className={className}
+    >
+      <path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.42-4.04-1.42-.55-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.22 1.84 1.22 1.08 1.82 2.82 1.3 3.5 1 .1-.77.42-1.3.76-1.6-2.67-.3-5.47-1.31-5.47-5.86 0-1.3.47-2.36 1.23-3.2-.12-.3-.53-1.52.12-3.16 0 0 1.01-.32 3.3 1.22a11.7 11.7 0 0 1 6 0c2.29-1.54 3.3-1.22 3.3-1.22.65 1.64.24 2.86.12 3.16.77.84 1.23 1.9 1.23 3.2 0 4.56-2.8 5.55-5.48 5.85.43.37.82 1.1.82 2.22v3.29c0 .32.22.69.83.58A12 12 0 0 0 12 .5Z" />
+    </svg>
+  )
+}
 
 export function Prijects() {
   return (
     <section id="projects" className="bg-black">
-      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-6">
         <div className="mb-10 max-w-3xl">
           <h2 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">
             Projects that show how I think
@@ -15,30 +80,40 @@ export function Prijects() {
           </p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {projects.map((project) => (
-            <div
+            <Card
               key={project.name}
-              className="group overflow-hidden rounded-[2rem] border border-white/10 bg-zinc-950/90 p-6 shadow-2xl shadow-black/30 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/30"
+              className="overflow-hidden rounded-[2rem] border border-white/10 bg-zinc-950/90 shadow-2xl shadow-black/30"
             >
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <div className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-                    {project.tag}
+              <Image
+                src={project.image}
+                alt={project.name}
+                width={640}
+                height={360}
+                className="h-48 w-full object-cover"
+              />
+
+              <CardHeader className="px-5 pt-5">
+                <div className="flex items-start justify-between gap-4">
+                  <CardTitle className="text-2xl text-white">{project.name}</CardTitle>
+                  <div className="flex items-center gap-3 text-zinc-400">
+                    <a href={project.source} target="_blank" rel="noreferrer" aria-label={`${project.name} source code`}>
+                      <GitHubIcon className="size-4 transition hover:text-white" />
+                    </a>
+                    <a href={project.live} target="_blank" rel="noreferrer" aria-label={`${project.name} live demo`}>
+                      <ExternalLink className="size-4 transition hover:text-white" />
+                    </a>
                   </div>
-                  <h3 className="mt-3 text-2xl font-semibold text-white">
-                    {project.name}
-                  </h3>
                 </div>
-                <div className="rounded-full border border-white/10 bg-zinc-900/80 p-2 text-zinc-400 transition group-hover:text-cyan-300">
-                  <ExternalLink className="size-4" />
-                </div>
-              </div>
-              <p className="mt-5 text-sm leading-7 text-zinc-400">{project.description}</p>
-              <div className="mt-6 rounded-2xl border border-white/10 bg-zinc-900/80 px-4 py-3 text-sm text-zinc-300">
-                {project.stack}
-              </div>
-            </div>
+              </CardHeader>
+
+              <CardContent className="px-5 pb-5">
+                <CardDescription className="text-sm leading-7 text-zinc-400">
+                  {project.description}
+                </CardDescription>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>
