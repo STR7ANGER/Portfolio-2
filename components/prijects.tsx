@@ -8,49 +8,50 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { MagicCard } from "@/components/ui/magic-card"
 
 const projects = [
   {
     name: "Taskmorpher",
     image: "/taskmorpher.png",
     description: "Productivity workspace with task tracking and collaboration.",
-    source: "#",
-    live: "#",
+    source: "https://github.com/STR7ANGER/TaskMorpher",
+    live: "https://task-morpher.vercel.app/",
   },
   {
     name: "Job Portal",
     image: "/jobprotal.png",
     description: "Job listing and hiring workflow platform for recruiters and candidates.",
-    source: "#",
-    live: "#",
+    source: "https://github.com/STR7ANGER/JOB-PORTAL",
+    live: "https://job-portal-green-nu.vercel.app/",
   },
   {
     name: "Virtual Venture",
     image: "/virtualventure.png",
     description: "Virtual business and trading simulator with live-style interactions.",
-    source: "#",
-    live: "#",
+    source: "https://github.com/STR7ANGER/Virtual_Ventures",
+    live: "https://virtual-ventures.netlify.app/",
   },
   {
     name: "Tech UI",
     image: "/techui.png",
     description: "Reusable UI components and design system for modern web apps.",
-    source: "#",
-    live: "#",
+    source: "https://github.com/STR7ANGER/UI_Library",
+    live: "https://astonishing-arithmetic-d5066a.netlify.app/",
   },
   {
-    name: "Learning HAbits",
+    name: "Learning Habits",
     image: "/learninghabit.png",
     description: "Learning tracker focused on consistency, streaks, and progress insights.",
-    source: "#",
-    live: "#",
+    source: "https://github.com/STR7ANGER/Learning-Habits",
+    live: "https://learning-habits-ebon.vercel.app/",
   },
   {
     name: "Bloomify",
     image: "/bloomify.png",
     description: "Growth-focused app experience with clean UX and engagement flows.",
-    source: "#",
-    live: "#",
+    source: "https://github.com/STR7ANGER/Bloomify",
+    live: "https://bloomify-bay.vercel.app/",
   },
 ]
 
@@ -82,38 +83,42 @@ export function Prijects() {
 
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {projects.map((project) => (
-            <Card
+            <MagicCard
               key={project.name}
-              className="overflow-hidden rounded-[2rem] border border-white/10 bg-zinc-950/90 shadow-2xl shadow-black/30"
+              gradientFrom="#ffffff"
+              gradientTo="#ffffff"
+              className="rounded-[2rem] transition-transform duration-300 hover:-translate-y-2"
             >
-              <Image
-                src={project.image}
-                alt={project.name}
-                width={640}
-                height={360}
-                className="h-48 w-full object-cover"
-              />
+              <Card className="overflow-hidden rounded-[2rem] border border-white/10 bg-zinc-950/90 shadow-2xl shadow-black/30">
+                <Image
+                  src={project.image}
+                  alt={project.name}
+                  width={640}
+                  height={360}
+                  className="h-48 w-full object-cover"
+                />
 
-              <CardHeader className="px-5 pt-5">
-                <div className="flex items-start justify-between gap-4">
-                  <CardTitle className="text-2xl text-white">{project.name}</CardTitle>
-                  <div className="flex items-center gap-3 text-zinc-400">
-                    <a href={project.source} target="_blank" rel="noreferrer" aria-label={`${project.name} source code`}>
-                      <GitHubIcon className="size-4 transition hover:text-white" />
-                    </a>
-                    <a href={project.live} target="_blank" rel="noreferrer" aria-label={`${project.name} live demo`}>
-                      <ExternalLink className="size-4 transition hover:text-white" />
-                    </a>
+                <CardHeader className="px-5 pt-5">
+                  <div className="flex items-start justify-between gap-4">
+                    <CardTitle className="text-2xl text-white">{project.name}</CardTitle>
+                    <div className="flex items-center gap-3 text-zinc-400">
+                      <a href={project.source} target="_blank" rel="noreferrer" aria-label={`${project.name} source code`}>
+                        <GitHubIcon className="size-4 transition hover:text-white" />
+                      </a>
+                      <a href={project.live} target="_blank" rel="noreferrer" aria-label={`${project.name} live demo`}>
+                        <ExternalLink className="size-4 transition hover:text-white" />
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </CardHeader>
+                </CardHeader>
 
-              <CardContent className="px-5 pb-5">
-                <CardDescription className="text-sm leading-7 text-zinc-400">
-                  {project.description}
-                </CardDescription>
-              </CardContent>
-            </Card>
+                <CardContent className="px-5 pb-5">
+                  <CardDescription className="text-sm leading-7 text-zinc-400">
+                    {project.description}
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            </MagicCard>
           ))}
         </div>
       </div>
