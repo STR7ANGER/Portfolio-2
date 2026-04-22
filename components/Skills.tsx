@@ -1,4 +1,5 @@
 import { BorderBeam } from "@/components/ui/border-beam"
+import SplitText from "@/components/SplitText"
 
 const skillGroups = [
   {
@@ -64,9 +65,15 @@ export function Skills() {
     <section id="skills" className="bg-black">
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mb-10 max-w-3xl">
-          <h2 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">
-            My technical stack
-          </h2>
+          <SplitText
+            text="My technical stack"
+            tag="h2"
+            splitType="words"
+            delay={40}
+            duration={1}
+            className="block text-3xl font-semibold tracking-tight text-white md:text-4xl"
+            textAlign="left"
+          />
           <p className="mt-3 text-sm leading-7 text-zinc-400 md:text-base">
             The core technologies I reach for when turning product ideas into something real.
           </p>

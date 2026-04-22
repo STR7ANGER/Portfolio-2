@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import LightPillar from "@/components/LightPillar"
+import SplitText from "@/components/SplitText"
 import { MagicCard } from "@/components/ui/magic-card"
 
 const projects = [
@@ -89,9 +90,15 @@ export function Prijects() {
       </div>
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-6">
         <div className="mb-10 max-w-3xl">
-          <h2 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">
-            Projects that show how I think
-          </h2>
+          <SplitText
+            text="Projects that show how I think"
+            tag="h2"
+            splitType="words"
+            delay={40}
+            duration={1}
+            className="block text-3xl font-semibold tracking-tight text-white md:text-4xl"
+            textAlign="left"
+          />
           <p className="mt-3 text-sm leading-7 text-zinc-400 md:text-base">
             A mix of product thinking, scale-minded engineering, and interface polish.
           </p>

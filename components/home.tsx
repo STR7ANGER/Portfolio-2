@@ -2,9 +2,11 @@
 
 import Link from "next/link"
 import { ArrowRight, Check, Copy } from "lucide-react"
+import { motion } from "motion/react"
 import { useState } from "react"
 
 import Beams from "@/components/Beams"
+import SplitText from "@/components/SplitText"
 import { Button } from "@/components/ui/button"
 
 export function Home() {
@@ -42,20 +44,44 @@ export function Home() {
       </div>
       <div className="relative z-10 mx-auto grid min-h-svh max-w-7xl items-center gap-12 px-4 pb-16 pt-24 sm:px-6 lg:grid-cols-[1.2fr_0.8fr] lg:px-8 lg:pb-20 lg:pt-28">
         <div>
-          <h1 className="max-w-4xl text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl">
-            I&apos;m Aditya Maurya
-          </h1>
-          <div className="mt-5 text-lg font-medium text-zinc-100 sm:text-xl">
+          <SplitText
+            text="I'm Aditya Maurya"
+            tag="h1"
+            splitType="chars"
+            delay={40}
+            duration={2}
+            className="block max-w-4xl text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl"
+            textAlign="left"
+          />
+          <motion.div
+            className="mt-5 text-lg font-medium text-zinc-100 sm:text-xl"
+            initial={{ opacity: 0, x: -48 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+          >
             Full-stack developer building clean products, strong backends, and
             scalable cloud systems.
-          </div>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-gray-300 sm:text-lg">
+          </motion.div>
+          <motion.p
+            className="mt-6 max-w-2xl text-base leading-8 text-gray-300 sm:text-lg"
+            initial={{ opacity: 0, x: -48 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+          >
             I focus on web apps that feel sharp in the UI and solid under the hood,
             with experience across product engineering, deployment workflows, and
             real-world shipping.
-          </p>
+          </motion.p>
 
-          <div className="mt-8 flex flex-wrap gap-3">
+          <motion.div
+            className="mt-8 flex flex-wrap gap-3"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.65, ease: "easeOut", delay: 0.25 }}
+          >
             <Button asChild className="rounded-full bg-white px-5 text-zinc-950 hover:bg-zinc-200">
               <Link href="#projects">
                 Explore projects
@@ -71,10 +97,16 @@ export function Home() {
                 Contact
               </Link>
             </Button>
-          </div>
+          </motion.div>
         </div>
 
-        <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-zinc-950/90 shadow-2xl shadow-black/30">
+        <motion.div
+          className="overflow-hidden rounded-[2rem] border border-white/10 bg-zinc-950/90 shadow-2xl shadow-black/30"
+          initial={{ opacity: 0, x: 72 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.75, ease: "easeOut", delay: 0.1 }}
+        >
           <div className="flex items-center gap-2 border-b border-white/10 px-5 py-4">
             <span className="size-3 rounded-full bg-[#ff5f57]" />
             <span className="size-3 rounded-full bg-[#febc2e]" />
@@ -147,7 +179,7 @@ export function Home() {
               </Link>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

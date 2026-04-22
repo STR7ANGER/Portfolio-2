@@ -11,6 +11,7 @@ import {
   School,
 } from "lucide-react"
 import DarkVeil from "@/components/DarkVeil"
+import SplitText from "@/components/SplitText"
 
 const birthday = {
   day: 28,
@@ -68,9 +69,15 @@ export function About() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mb-10 max-w-3xl">
-          <h2 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">
-            Me in a bento
-          </h2>
+          <SplitText
+            text="Me in a bento"
+            tag="h2"
+            splitType="words"
+            delay={40}
+            duration={1}
+            className="block text-3xl font-semibold tracking-tight text-white md:text-4xl"
+            textAlign="left"
+          />
           <p className="mt-4 text-sm leading-7 text-zinc-400 md:text-base">
             Just more about me outsite the code editor.
           </p>

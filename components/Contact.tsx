@@ -4,6 +4,7 @@ import { Mail, Phone, Send, User } from "lucide-react"
 import { type ChangeEvent, type FormEvent, useState } from "react"
 
 import { Button } from "@/components/ui/button"
+import SplitText from "@/components/SplitText"
 
 type FormState = {
   name: string
@@ -81,9 +82,15 @@ export function Contact() {
     <section id="contact" className="bg-black">
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mb-10 max-w-3xl">
-          <h2 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">
-            Let&apos;s make something ridiculously good
-          </h2>
+          <SplitText
+            text="Let's make something ridiculously good"
+            tag="h2"
+            splitType="words"
+            delay={40}
+            duration={1}
+            className="block text-3xl font-semibold tracking-tight text-white md:text-4xl"
+            textAlign="left"
+          />
           <p className="mt-3 text-sm leading-7 text-zinc-400 md:text-base">
             Send a message straight from here. I&apos;ll receive it on Gmail, and the sender gets a confirmation email too.
           </p>

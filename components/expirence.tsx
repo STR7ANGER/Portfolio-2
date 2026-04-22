@@ -1,5 +1,6 @@
 import { experiences } from "@/components/portfolio-data"
 import LightPillar from "@/components/LightPillar"
+import SplitText from "@/components/SplitText"
 import { ShineBorder } from "@/components/ui/shine-border"
 
 export function Expirence() {
@@ -22,9 +23,15 @@ export function Expirence() {
       </div>
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mb-10 max-w-3xl">
-          <h2 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">
-            Where I&apos;ve been shipping
-          </h2>
+          <SplitText
+            text="Where I've been shipping"
+            tag="h2"
+            splitType="words"
+            delay={40}
+            duration={1}
+            className="block text-3xl font-semibold tracking-tight text-white md:text-4xl"
+            textAlign="left"
+          />
           <p className="mt-3 text-sm leading-7 text-zinc-400 md:text-base">
             Hands-on work across enterprise systems, AI products, fintech dashboards, and education platforms.
           </p>

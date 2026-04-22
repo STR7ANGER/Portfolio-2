@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { motion } from "motion/react"
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
 
 const navItems = [
@@ -169,7 +170,12 @@ export function Navbar() {
   }
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-transparent">
+    <motion.header
+      className="fixed inset-x-0 top-0 z-50 bg-transparent"
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.65, ease: "easeOut" }}
+    >
       <div className="mx-auto flex max-w-7xl items-center justify-center gap-6 px-4 py-4 sm:px-6 lg:px-8">
         <div
           ref={desktopNavRef}
@@ -239,6 +245,6 @@ export function Navbar() {
           })}
         </div>
       </div>
-    </header>
+    </motion.header>
   )
 }
