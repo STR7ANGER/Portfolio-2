@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import LightPillar from "@/components/LightPillar"
 import { MagicCard } from "@/components/ui/magic-card"
 
 const projects = [
@@ -70,8 +71,23 @@ function GitHubIcon({ className }: { className?: string }) {
 
 export function Prijects() {
   return (
-    <section id="projects" className="bg-black">
-      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-6">
+    <section id="projects" className="relative overflow-hidden bg-black">
+      <div className="pointer-events-none absolute inset-0 opacity-45">
+        <LightPillar
+          topColor="#ffffff"
+          bottomColor="#ffffff"
+          intensity={0.2}
+          glowAmount={0.008}
+          noiseIntensity={0.08}
+          rotationSpeed={2}
+          quality="medium"
+          pillarWidth={3.8}
+          pillarHeight={0.5}
+          pillarRotation={90}
+          mixBlendMode="screen"
+        />
+      </div>
+      <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-6">
         <div className="mb-10 max-w-3xl">
           <h2 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">
             Projects that show how I think

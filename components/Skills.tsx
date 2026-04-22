@@ -1,4 +1,63 @@
-import { skillGroups } from "@/components/portfolio-data"
+import { BorderBeam } from "@/components/ui/border-beam"
+
+const skillGroups = [
+  {
+    title: "Languages",
+    items: ["JavaScript", "TypeScript", "Python", "C++", "C#", "Java", "Go"],
+  },
+  {
+    title: "Backend & APIs",
+    items: [
+      "Node.js",
+      "Express",
+      "NestJS",
+      "Django",
+      ".NET",
+      "REST APIs",
+      "GraphQL",
+      "WebSockets",
+    ],
+  },
+  {
+    title: "Cloud & DevOps",
+    items: [
+      "AWS",
+      "Azure",
+      "Docker",
+      "Kubernetes",
+      "Terraform",
+      "CI/CD",
+      "GitHub Actions",
+      "Linux",
+    ],
+  },
+  {
+    title: "Databases",
+    items: ["PostgreSQL", "MySQL", "SQL Server", "MongoDB", "Redis", "DynamoDB"],
+  },
+  {
+    title: "Frontend",
+    items: ["React", "Next.js", "Vue.js", "Tailwind CSS"],
+  },
+  {
+    title: "Automation & Tools",
+    items: ["Git", "Bash", "Prisma", "Mongoose", "Entity Framework"],
+  },
+  {
+    title: "Testing",
+    items: ["Postman", "UI and workflow testing", "Jest", "Chrome DevTools"],
+  },
+  {
+    title: "Core CS",
+    items: [
+      "DSA",
+      "System Design",
+      "Operating Systems",
+      "Computer Networks",
+      "DBMS",
+    ],
+  },
+] as const
 
 export function Skills() {
   return (
@@ -17,8 +76,9 @@ export function Skills() {
           {skillGroups.map((group) => (
             <div
               key={group.title}
-              className="rounded-[2rem] border border-white/10 bg-zinc-950/90 p-6 shadow-2xl shadow-black/30"
+              className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-zinc-950/90 p-6 shadow-2xl shadow-black/30"
             >
+              <BorderBeam size={140} duration={8} colorFrom="#ffffff" colorTo="#ffffff" />
               <h3 className="text-lg font-semibold text-white">{group.title}</h3>
               <div className="mt-5 flex flex-wrap gap-2">
                 {group.items.map((item) => (
