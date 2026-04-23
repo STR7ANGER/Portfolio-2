@@ -1,12 +1,12 @@
-'use client';
+"use client"
 
-import { useRef, useEffect } from 'react';
-import { Renderer, Program, Mesh, Triangle, Vec2, Vec3 } from 'ogl';
+import { useEffect, useRef } from "react"
+import { Mesh, Program, Renderer, Triangle, Vec2, Vec3 } from "ogl"
 
 const vertex = `
 attribute vec2 position;
 void main(){gl_Position=vec4(position,0.0,1.0);}
-`;
+`
 
 const fragment = `
 #ifdef GL_ES
@@ -78,39 +78,39 @@ void main(){
     col.rgb+=(rand(gl_FragCoord.xy+uTime)-0.5)*uNoise;
     gl_FragColor=vec4(clamp(col.rgb,0.0,1.0),1.0);
 }
-`;
+`
 
 type Props = {
-  hueShift?: number;
-  noiseIntensity?: number;
-  scanlineIntensity?: number;
-  speed?: number;
-  scanlineFrequency?: number;
-  warpAmount?: number;
-  resolutionScale?: number;
-  tintColor?: string;
-  tint?: number;
-};
+  hueShift?: number
+  noiseIntensity?: number
+  scanlineIntensity?: number
+  speed?: number
+  scanlineFrequency?: number
+  warpAmount?: number
+  resolutionScale?: number
+  tintColor?: string
+  tint?: number
+}
 
 function hexToRgb01(hex: string) {
-  const normalized = hex.trim().replace(/^#/, "");
-  const isShort = normalized.length === 3;
+  const normalized = hex.trim().replace(/^#/, "")
+  const isShort = normalized.length === 3
   const full = isShort
     ? normalized
         .split("")
         .map((c) => c + c)
         .join("")
-    : normalized;
+    : normalized
 
-  if (full.length !== 6) return { r: 1, g: 1, b: 1 };
+  if (full.length !== 6) return { r: 1, g: 1, b: 1 }
 
-  const n = Number.parseInt(full, 16);
-  if (Number.isNaN(n)) return { r: 1, g: 1, b: 1 };
+  const n = Number.parseInt(full, 16)
+  if (Number.isNaN(n)) return { r: 1, g: 1, b: 1 }
 
-  const r = (n >> 16) & 255;
-  const g = (n >> 8) & 255;
-  const b = n & 255;
-  return { r: r / 255, g: g / 255, b: b / 255 };
+  const r = (n >> 16) & 255
+  const g = (n >> 8) & 255
+  const b = n & 255
+  return { r: r / 255, g: g / 255, b: b / 255 }
 }
 
 export default function DarkVeil({
@@ -122,21 +122,21 @@ export default function DarkVeil({
   warpAmount = 0,
   resolutionScale = 1,
   tintColor = "#ffffff",
-  tint = 0
+  tint = 0,
 }: Props) {
-  const ref = useRef<HTMLCanvasElement>(null);
+  const ref = useRef<HTMLCanvasElement>(null)
   useEffect(() => {
-    const canvas = ref.current as HTMLCanvasElement;
-    const parent = canvas.parentElement as HTMLElement;
+    const canvas = ref.current as HTMLCanvasElement
+    const parent = canvas.parentElement as HTMLElement
 
     const renderer = new Renderer({
       dpr: Math.min(window.devicePixelRatio, 2),
-      canvas
-    });
+      canvas,
+    })
 
-    const gl = renderer.gl;
-    const geometry = new Triangle(gl);
-    const { r, g, b } = hexToRgb01(tintColor);
+    const gl = renderer.gl
+    const geometry = new Triangle(gl)
+    const { r, g, b } = hexToRgb01(tintColor)
 
     const program = new Program(gl, {
       vertex,
@@ -150,48 +150,48 @@ export default function DarkVeil({
         uScanFreq: { value: scanlineFrequency },
         uWarp: { value: warpAmount },
         uTintColor: { value: new Vec3(r, g, b) },
-        uTint: { value: tint }
-      }
-    });
+        uTint: { value: tint },
+      },
+    })
 
-    const mesh = new Mesh(gl, { geometry, program });
+    const mesh = new Mesh(gl, { geometry, program })
 
     const resize = () => {
       const w = parent.clientWidth,
-        h = parent.clientHeight;
-      renderer.setSize(w * resolutionScale, h * resolutionScale);
-      program.uniforms.uResolution.value.set(w, h);
-    };
+        h = parent.clientHeight
+      renderer.setSize(w * resolutionScale, h * resolutionScale)
+      program.uniforms.uResolution.value.set(w, h)
+    }
 
-    window.addEventListener('resize', resize);
-    resize();
+    window.addEventListener("resize", resize)
+    resize()
 
-    const start = performance.now();
-    let frame = 0;
+    const start = performance.now()
+    let frame = 0
 
     const loop = () => {
-      program.uniforms.uTime.value = ((performance.now() - start) / 1000) * speed;
-      program.uniforms.uHueShift.value = hueShift;
-      program.uniforms.uNoise.value = noiseIntensity;
-      program.uniforms.uScan.value = scanlineIntensity;
-      program.uniforms.uScanFreq.value = scanlineFrequency;
-      program.uniforms.uWarp.value = warpAmount;
-      program.uniforms.uTint.value = tint;
+      program.uniforms.uTime.value = ((performance.now() - start) / 1000) * speed
+      program.uniforms.uHueShift.value = hueShift
+      program.uniforms.uNoise.value = noiseIntensity
+      program.uniforms.uScan.value = scanlineIntensity
+      program.uniforms.uScanFreq.value = scanlineFrequency
+      program.uniforms.uWarp.value = warpAmount
+      program.uniforms.uTint.value = tint
       program.uniforms.uTintColor.value.set(
         hexToRgb01(tintColor).r,
         hexToRgb01(tintColor).g,
         hexToRgb01(tintColor).b
-      );
-      renderer.render({ scene: mesh });
-      frame = requestAnimationFrame(loop);
-    };
+      )
+      renderer.render({ scene: mesh })
+      frame = requestAnimationFrame(loop)
+    }
 
-    loop();
+    loop()
 
     return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener('resize', resize);
-    };
+      cancelAnimationFrame(frame)
+      window.removeEventListener("resize", resize)
+    }
   }, [
     hueShift,
     noiseIntensity,
@@ -202,6 +202,7 @@ export default function DarkVeil({
     resolutionScale,
     tintColor,
     tint,
-  ]);
-  return <canvas ref={ref} className="w-full h-full block" />;
+  ])
+  return <canvas ref={ref} className="block h-full w-full" />
 }
+

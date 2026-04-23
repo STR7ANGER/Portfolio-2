@@ -153,21 +153,22 @@ export function Navbar() {
     return () => window.removeEventListener("resize", onResize)
   }, [activeItem])
 
-  const handleClick = (item: string) => (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault()
-    clickScrollTargetRef.current = item
-    if (clickScrollTimeoutRef.current) {
-      window.clearTimeout(clickScrollTimeoutRef.current)
+  const handleClick =
+    (item: string) => (event: React.MouseEvent<HTMLAnchorElement>) => {
+      event.preventDefault()
+      clickScrollTargetRef.current = item
+      if (clickScrollTimeoutRef.current) {
+        window.clearTimeout(clickScrollTimeoutRef.current)
+      }
+      clickScrollTimeoutRef.current = window.setTimeout(() => {
+        clickScrollTargetRef.current = null
+      }, 900)
+      setActiveItem(item)
+      document.getElementById(item.toLowerCase())?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      })
     }
-    clickScrollTimeoutRef.current = window.setTimeout(() => {
-      clickScrollTargetRef.current = null
-    }, 900)
-    setActiveItem(item)
-    document.getElementById(item.toLowerCase())?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    })
-  }
 
   return (
     <motion.header
@@ -248,3 +249,4 @@ export function Navbar() {
     </motion.header>
   )
 }
+

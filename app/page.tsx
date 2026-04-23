@@ -1,15 +1,14 @@
-import { Code2, Layers3 } from "lucide-react"
 
-import { About } from "@/components/about"
-import { Contact } from "@/components/Contact"
-import { DSA } from "@/components/DSA"
-import { Expirence } from "@/components/expirence"
-import { Home } from "@/components/home"
-import { Navbar } from "@/components/navbar"
-import { Prijects } from "@/components/prijects"
+import { Navbar } from "@/components/layout/Navbar"
+import { About } from "@/components/sections/About"
+import { Contact } from "@/components/sections/Contact"
+import { DSA } from "@/components/sections/Dsa"
+import { Experience } from "@/components/sections/Experience"
+import { Home } from "@/components/sections/Home"
+import { Projects } from "@/components/sections/Projects"
 import { RetroGrid } from "@/components/ui/retro-grid"
-import { Skills } from "@/components/Skills"
-import { Tools } from "@/components/tools"
+import { Skills } from "@/components/sections/Skills"
+import { Tools } from "@/components/sections/Tools"
 
 export default function Page() {
   return (
@@ -18,8 +17,8 @@ export default function Page() {
 
       <Home />
       <About />
-      <Expirence />
-      <Prijects />
+      <Experience />
+      <Projects />
       <Skills />
       <Tools />
       <DSA />

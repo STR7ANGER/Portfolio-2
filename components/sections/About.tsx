@@ -4,13 +4,13 @@ import {
   Briefcase,
   Cake,
   GraduationCap,
-  Landmark,
   MapPin,
   MonitorSmartphone,
   Rocket,
   School,
 } from "lucide-react"
-import DarkVeil from "@/components/DarkVeil"
+
+import DarkVeil from "@/components/fx/DarkVeil"
 import SplitText from "@/components/SplitText"
 
 const birthday = {
@@ -98,10 +98,10 @@ export function About() {
               fast, clean, and genuinely helpful in everyday life.
             </p>
             <p className="mt-4 text-sm leading-7 text-zinc-400">
-              The kind of work I naturally enjoy sits at the intersection of product
-              thinking, backend reliability, cloud systems, and thoughtful UI.
-              I&apos;m happiest when I&apos;m building tools and applications that improve
-              quality of life and remove friction for real people.
+              The kind of work I naturally enjoy sits at the intersection of
+              product thinking, backend reliability, cloud systems, and thoughtful
+              UI. I&apos;m happiest when I&apos;m building tools and applications that
+              improve quality of life and remove friction for real people.
             </p>
           </div>
 
@@ -129,9 +129,7 @@ export function About() {
                 <div className="mt-2 text-base font-medium text-white">
                   St. Montfort
                 </div>
-                <div className="mt-2 text-sm leading-6 text-zinc-400">
-                  PCM + CS
-                </div>
+                <div className="mt-2 text-sm leading-6 text-zinc-400">PCM + CS</div>
               </div>
             </div>
           </div>
@@ -141,7 +139,9 @@ export function About() {
               <Cake className="size-5 text-cyan-300" />
               <div className="text-sm font-medium text-white">Date of birth</div>
             </div>
-            <div className="mt-6 text-2xl font-semibold text-white">28 July 2005</div>
+            <div className="mt-6 text-2xl font-semibold text-white">
+              28 July 2005
+            </div>
             <div className="mt-2 text-sm text-zinc-400">
               Wish me on 28 July. Currently {age} years old.
             </div>
@@ -166,7 +166,8 @@ export function About() {
             </div>
             <div className="mt-6 text-2xl font-semibold text-white">India</div>
             <div className="mt-2 text-sm leading-6 text-zinc-400">
-              Available anywhere for good work, strong teams, and exciting products.
+              Available anywhere for good work, strong teams, and exciting
+              products.
             </div>
           </div>
 
@@ -182,7 +183,9 @@ export function About() {
               </div>
               <div className="rounded-2xl border border-white/10 bg-zinc-900/80 p-4">
                 <div className="text-3xl font-semibold text-white">2</div>
-                <div className="mt-1 text-sm text-zinc-400">Company environments</div>
+                <div className="mt-1 text-sm text-zinc-400">
+                  Company environments
+                </div>
               </div>
             </div>
           </div>
@@ -205,3 +208,4 @@ export function About() {
     </section>
   )
 }
+

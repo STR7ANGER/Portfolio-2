@@ -5,7 +5,7 @@ import { ArrowRight, Check, Copy } from "lucide-react"
 import { motion } from "motion/react"
 import { useState } from "react"
 
-import Beams from "@/components/Beams"
+import Beams from "@/components/fx/Beams"
 import SplitText from "@/components/SplitText"
 import { Button } from "@/components/ui/button"
 
@@ -130,7 +130,9 @@ export function Home() {
               <span className="mr-1 text-zinc-100">$</span>
               <span className="text-zinc-100">stack --top</span>
             </div>
-            <div className="break-words text-zinc-400">Next · Node · TS · PSQL · AWS · GO</div>
+            <div className="break-words text-zinc-400">
+              Next · Node · TS · PSQL · AWS · GO
+            </div>
 
             <div className="break-words">
               <span className="mr-1 text-zinc-100">$</span>
@@ -146,7 +148,9 @@ export function Home() {
             </div>
             <div className="group flex items-center gap-2">
               <Link
-                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+                  email
+                )}`}
                 target="_blank"
                 rel="noreferrer"
                 className="block break-words text-zinc-400 transition hover:text-white"
@@ -160,7 +164,11 @@ export function Home() {
                 aria-label="Copy email address"
                 title={isCopied ? "Copied!" : "Copy email"}
               >
-                {isCopied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
+                {isCopied ? (
+                  <Check className="size-3.5" />
+                ) : (
+                  <Copy className="size-3.5" />
+                )}
               </button>
             </div>
 
@@ -200,3 +208,4 @@ export function Home() {
     </section>
   )
 }
+

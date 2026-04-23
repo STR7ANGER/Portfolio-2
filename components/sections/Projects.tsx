@@ -1,6 +1,9 @@
 import Image from "next/image"
 import { ExternalLink } from "lucide-react"
 
+import LightPillar from "@/components/fx/LightPillar"
+import SplitText from "@/components/SplitText"
+import { MagicCard } from "@/components/ui/magic-card"
 import {
   Card,
   CardContent,
@@ -8,9 +11,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import LightPillar from "@/components/LightPillar"
-import SplitText from "@/components/SplitText"
-import { MagicCard } from "@/components/ui/magic-card"
 
 const projects = [
   {
@@ -23,7 +23,8 @@ const projects = [
   {
     name: "Job Portal",
     image: "/jobprotal.png",
-    description: "Job listing and hiring workflow platform for recruiters and candidates.",
+    description:
+      "Job listing and hiring workflow platform for recruiters and candidates.",
     source: "https://github.com/STR7ANGER/JOB-PORTAL",
     live: "https://job-portal-green-nu.vercel.app/",
   },
@@ -70,7 +71,7 @@ function GitHubIcon({ className }: { className?: string }) {
   )
 }
 
-export function Prijects() {
+export function Projects() {
   return (
     <section id="projects" className="relative overflow-hidden bg-black">
       <div className="pointer-events-none absolute inset-0 opacity-45">
@@ -123,12 +124,24 @@ export function Prijects() {
 
                 <CardHeader className="px-5 pt-5">
                   <div className="flex items-start justify-between gap-4">
-                    <CardTitle className="text-2xl text-white">{project.name}</CardTitle>
+                    <CardTitle className="text-2xl text-white">
+                      {project.name}
+                    </CardTitle>
                     <div className="flex items-center gap-3 text-zinc-400">
-                      <a href={project.source} target="_blank" rel="noreferrer" aria-label={`${project.name} source code`}>
+                      <a
+                        href={project.source}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`${project.name} source code`}
+                      >
                         <GitHubIcon className="size-4 transition hover:text-white" />
                       </a>
-                      <a href={project.live} target="_blank" rel="noreferrer" aria-label={`${project.name} live demo`}>
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`${project.name} live demo`}
+                      >
                         <ExternalLink className="size-4 transition hover:text-white" />
                       </a>
                     </div>
@@ -148,3 +161,4 @@ export function Prijects() {
     </section>
   )
 }
+

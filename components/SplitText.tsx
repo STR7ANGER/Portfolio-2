@@ -38,7 +38,7 @@ const SplitText: React.FC<SplitTextProps> = ({
   textAlign = 'center',
   onLetterAnimationComplete
 }) => {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLElement | null>(null);
   const animationCompletedRef = useRef(false);
   const onCompleteRef = useRef(onLetterAnimationComplete);
   const [fontsLoaded, setFontsLoaded] = useState<boolean>(false);
@@ -50,7 +50,7 @@ const SplitText: React.FC<SplitTextProps> = ({
 
   useEffect(() => {
     if (document.fonts.status === 'loaded') {
-      setFontsLoaded(true);
+      Promise.resolve().then(() => setFontsLoaded(true));
     } else {
       document.fonts.ready.then(() => {
         setFontsLoaded(true);
@@ -70,7 +70,7 @@ const SplitText: React.FC<SplitTextProps> = ({
       if (el._rbsplitInstance) {
         try {
           el._rbsplitInstance.revert();
-        } catch (_) {}
+        } catch {}
         el._rbsplitInstance = undefined;
       }
 
@@ -135,7 +135,7 @@ const SplitText: React.FC<SplitTextProps> = ({
         });
         try {
           splitInstance.revert();
-        } catch (_) {}
+        } catch {}
         el._rbsplitInstance = undefined;
       };
     },
@@ -156,23 +156,27 @@ const SplitText: React.FC<SplitTextProps> = ({
     }
   );
 
-  const renderTag = () => {
-    const style: React.CSSProperties = {
-      textAlign,
-      wordWrap: 'break-word',
-      willChange: 'transform, opacity',
-      overflow: 'visible',
-      paddingBottom: '0.08em'
-    };
-    const classes = `split-parent inline-block whitespace-normal ${className}`;
-    return React.createElement(
-      tag || 'p',
-      { ref: ref as React.Ref<HTMLElement>, style, className: classes },
-      text
-    );
+  const Tag = tag || 'p';
+  const style: React.CSSProperties = {
+    textAlign,
+    wordWrap: 'break-word',
+    willChange: 'transform, opacity',
+    overflow: 'visible',
+    paddingBottom: '0.08em'
   };
+  const classes = `split-parent inline-block whitespace-normal ${className}`;
 
-  return renderTag();
+  return (
+    <Tag
+      ref={(node: unknown) => {
+        ref.current = node as HTMLElement | null
+      }}
+      style={style}
+      className={classes}
+    >
+      {text}
+    </Tag>
+  )
 };
 
 export default SplitText;

@@ -75,7 +75,8 @@ export function Skills() {
             textAlign="left"
           />
           <p className="mt-3 text-sm leading-7 text-zinc-400 md:text-base">
-            The core technologies I reach for when turning product ideas into something real.
+            The core technologies I reach for when turning product ideas into something
+            real.
           </p>
         </div>
 
@@ -85,7 +86,12 @@ export function Skills() {
               key={group.title}
               className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-zinc-950/90 p-6 shadow-2xl shadow-black/30"
             >
-              <BorderBeam size={140} duration={8} colorFrom="#ffffff" colorTo="#ffffff" />
+              <BorderBeam
+                size={140}
+                duration={8}
+                colorFrom="#ffffff"
+                colorTo="#ffffff"
+              />
               <h3 className="text-lg font-semibold text-white">{group.title}</h3>
               <div className="mt-5 flex flex-wrap gap-2">
                 {group.items.map((item) => (
@@ -104,3 +110,4 @@ export function Skills() {
     </section>
   )
 }
+

@@ -60,7 +60,12 @@ export function Tools() {
               key={project.title}
               className="relative overflow-hidden rounded-xl border border-white/10 bg-zinc-950/90 p-6 shadow-2xl shadow-black/30 transition-colors hover:border-white/20"
             >
-              <BorderBeam size={120} duration={10} colorFrom="#ffffff" colorTo="#ffffff" />
+              <BorderBeam
+                size={120}
+                duration={10}
+                colorFrom="#ffffff"
+                colorTo="#ffffff"
+              />
 
               <div className="relative z-10">
                 <span className="inline-flex rounded-full border border-white/15 bg-white/5 px-2.5 py-1 text-xs font-medium tracking-wide text-zinc-300">
@@ -83,3 +88,4 @@ export function Tools() {
     </section>
   )
 }
+

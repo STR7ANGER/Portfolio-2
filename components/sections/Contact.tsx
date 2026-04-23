@@ -4,8 +4,8 @@ import { ExternalLink, Mail, Phone, Send, User } from "lucide-react"
 import { type ChangeEvent, type FormEvent, useState } from "react"
 import { toast } from "sonner"
 
-import { Button } from "@/components/ui/button"
 import SplitText from "@/components/SplitText"
+import { Button } from "@/components/ui/button"
 import { Toaster } from "@/components/ui/sonner"
 import { contactSchema, type ContactInput } from "@/lib/validation/contact"
 
@@ -27,9 +27,9 @@ export function Contact() {
   const [form, setForm] = useState<FormState>(initialFormState)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [hasSubmitted, setHasSubmitted] = useState(false)
-  const [errors, setErrors] = useState<
-    Partial<Record<keyof ContactInput, string>>
-  >({})
+  const [errors, setErrors] = useState<Partial<Record<keyof ContactInput, string>>>(
+    {}
+  )
 
   const validateAll = (next: FormState) => {
     const parsed = contactSchema.safeParse(next)
@@ -121,7 +121,8 @@ export function Contact() {
             textAlign="left"
           />
           <p className="mt-3 text-sm leading-7 text-zinc-400 md:text-base">
-            Send a message straight from here. I&apos;ll receive it on Gmail, and the sender gets a confirmation email too.
+            Send a message straight from here. I&apos;ll receive it on Gmail, and the
+            sender gets a confirmation email too.
           </p>
         </div>
 
@@ -354,3 +355,4 @@ export function Contact() {
     </section>
   )
 }
+

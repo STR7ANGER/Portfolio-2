@@ -11,7 +11,9 @@ export interface LeetcodeStats {
   hardSolved: number
 }
 
-export async function fetchLeetcodeStats(username: string): Promise<LeetcodeStats | null> {
+export async function fetchLeetcodeStats(
+  username: string
+): Promise<LeetcodeStats | null> {
   const query = `
     query getUserProfile($username: String!) {
       matchedUser(username: $username) {
@@ -68,7 +70,7 @@ export async function fetchLeetcodeStats(username: string): Promise<LeetcodeStat
   }
 }
 
-export async function DSA() {
+export async function Dsa() {
   const leetcodeUsername = "Xiafloxy"
   const leetcodeStats = await fetchLeetcodeStats(leetcodeUsername)
   const codolioUrl = "https://codolio.com/profile/Xifloxy"
@@ -87,7 +89,8 @@ export async function DSA() {
             textAlign="left"
           />
           <p className="mt-3 text-sm leading-7 text-zinc-400 md:text-base">
-            Because shipping products is fun, but having algorithmic discipline in the bag is also very nice.
+            Because shipping products is fun, but having algorithmic discipline in the
+            bag is also very nice.
           </p>
         </div>
 
@@ -158,7 +161,8 @@ export async function DSA() {
 
               {!leetcodeStats ? (
                 <div className="mt-4 text-xs text-zinc-500">
-                  Stats are temporarily unavailable (LeetCode rate limit / network). The rest of the section still renders.
+                  Stats are temporarily unavailable (LeetCode rate limit / network).
+                  The rest of the section still renders.
                 </div>
               ) : null}
             </div>
@@ -176,7 +180,9 @@ export async function DSA() {
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <div className="text-sm font-medium text-zinc-300">Codolio</div>
-                  <div className="mt-1 text-xs text-zinc-400">Checkout my other coding profiles</div>
+                  <div className="mt-1 text-xs text-zinc-400">
+                    Checkout my other coding profiles
+                  </div>
                   <div className="mt-4 inline-flex text-xs text-cyan-300 group-hover:text-cyan-200">
                     Open profile →
                   </div>
@@ -193,3 +199,6 @@ export async function DSA() {
     </section>
   )
 }
+
+export { Dsa as DSA }
+
