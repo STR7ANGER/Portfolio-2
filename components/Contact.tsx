@@ -1,6 +1,6 @@
 "use client"
 
-import { Mail, Phone, Send, User } from "lucide-react"
+import { ExternalLink, Mail, Phone, Send, User } from "lucide-react"
 import { type ChangeEvent, type FormEvent, useState } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -108,9 +108,13 @@ export function Contact() {
                     <div className="text-xs uppercase tracking-[0.2em] text-zinc-500">
                       Email
                     </div>
-                    <div className="mt-1 text-sm text-zinc-200">
+                    <a
+                      href="mailto:adityamaurya.2807@gmail.com"
+                      className="mt-1 inline-flex items-center gap-2 text-sm text-zinc-200 transition hover:text-white"
+                    >
                       adityamaurya.2807@gmail.com
-                    </div>
+                      <ExternalLink className="size-3.5 text-zinc-500" />
+                    </a>
                   </div>
                 </div>
               </div>
@@ -124,9 +128,13 @@ export function Contact() {
                     <div className="text-xs uppercase tracking-[0.2em] text-zinc-500">
                       Phone
                     </div>
-                    <div className="mt-1 text-sm text-zinc-200">
-                      Share yours in the form and I&apos;ll get back to you.
-                    </div>
+                    <a
+                      href="tel:+918602019492"
+                      className="mt-1 inline-flex items-center gap-2 text-sm text-zinc-200 transition hover:text-white"
+                    >
+                      +91-8602019492
+                      <ExternalLink className="size-3.5 text-zinc-500" />
+                    </a>
                   </div>
                 </div>
               </div>
@@ -138,11 +146,61 @@ export function Contact() {
                   </div>
                   <div>
                     <div className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-                      Response flow
+                      Instagram
                     </div>
-                    <div className="mt-1 text-sm leading-6 text-zinc-200">
-                      Your message lands in my Gmail inbox and a confirmation is sent back to the email entered here.
+                    <a
+                      href="https://www.instagram.com/_.strange.0_0"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-1 inline-flex items-center gap-2 text-sm text-zinc-200 transition hover:text-white"
+                    >
+                      @_.strange.0_0
+                      <ExternalLink className="size-3.5 text-zinc-500" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-white/10 bg-zinc-900/80 p-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex size-10 items-center justify-center rounded-xl border border-white/10 bg-black/30">
+                    <User className="size-4 text-cyan-300" />
+                  </div>
+                  <div>
+                    <div className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                      LinkedIn
                     </div>
+                    <a
+                      href="https://www.linkedin.com/in/adimaurya/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-1 inline-flex items-center gap-2 text-sm text-zinc-200 transition hover:text-white"
+                    >
+                      adimaurya
+                      <ExternalLink className="size-3.5 text-zinc-500" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-white/10 bg-zinc-900/80 p-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex size-10 items-center justify-center rounded-xl border border-white/10 bg-black/30">
+                    <User className="size-4 text-cyan-300" />
+                  </div>
+                  <div>
+                    <div className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                      X
+                    </div>
+                    <a
+                      href="https://x.com/AdI0_0I"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-1 inline-flex items-center gap-2 text-sm text-zinc-200 transition hover:text-white"
+                    >
+                      @AdI0_0I
+                      <ExternalLink className="size-3.5 text-zinc-500" />
+                    </a>
                   </div>
                 </div>
               </div>
