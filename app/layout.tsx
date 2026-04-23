@@ -3,6 +3,7 @@ import { Geist_Mono, Inter } from "next/font/google"
 
 import "./globals.css"
 import { cn } from "@/lib/utils"
+import { ThemeProvider } from "@/components/theme-provider"
 
 export const metadata: Metadata = {
   title: "Aditya Maurya | Portfolio",
@@ -33,7 +34,11 @@ export default function RootLayout({
         inter.variable
       )}
     >
-      <body className="bg-black text-foreground">{children}</body>
+      <body className="bg-black text-foreground">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   )
 }

@@ -13,6 +13,10 @@ export function Home() {
   const [isCopied, setIsCopied] = useState(false)
   const email = "adityamaurya.2807@gmail.com"
 
+  const scrollToSection = (id: string) => () => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+  }
+
   const handleCopyEmail = async () => {
     try {
       await navigator.clipboard.writeText(email)
@@ -82,20 +86,21 @@ export function Home() {
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.65, ease: "easeOut", delay: 0.25 }}
           >
-            <Button asChild className="rounded-full bg-white px-5 text-zinc-950 hover:bg-zinc-200">
-              <Link href="#projects">
-                Explore projects
-                <ArrowRight className="size-4" />
-              </Link>
+            <Button
+              type="button"
+              onClick={scrollToSection("projects")}
+              className="rounded-full bg-white px-5 text-zinc-950 hover:bg-zinc-200"
+            >
+              Explore projects
+              <ArrowRight className="size-4" />
             </Button>
             <Button
-              asChild
+              type="button"
               variant="outline"
+              onClick={scrollToSection("contact")}
               className="rounded-full border-white/10 bg-white/5 px-5 text-white hover:bg-white/10"
             >
-              <Link href="https://mail.google.com/mail/?view=cm&fs=1&to=adityamaurya.2807@gmail.com">
-                Contact
-              </Link>
+              Contact
             </Button>
           </motion.div>
         </div>
@@ -141,7 +146,9 @@ export function Home() {
             </div>
             <div className="group flex items-center gap-2">
               <Link
-                href={`mailto:${email}`}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`}
+                target="_blank"
+                rel="noreferrer"
                 className="block break-words text-zinc-400 transition hover:text-white"
               >
                 {email}
@@ -164,17 +171,26 @@ export function Home() {
             <div className="flex flex-wrap gap-x-4 gap-y-1 text-zinc-400">
               <Link
                 href="https://www.linkedin.com/in/adimaurya"
+                target="_blank"
+                rel="noreferrer"
                 className="transition hover:text-white"
               >
                 LinkedIn
               </Link>
               <Link
                 href="https://github.com/STR7ANGER"
+                target="_blank"
+                rel="noreferrer"
                 className="transition hover:text-white"
               >
                 GitHub
               </Link>
-              <Link href="https://leetcode.com/" className="transition hover:text-white">
+              <Link
+                href="https://leetcode.com/"
+                target="_blank"
+                rel="noreferrer"
+                className="transition hover:text-white"
+              >
                 LeetCode
               </Link>
             </div>

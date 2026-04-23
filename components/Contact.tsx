@@ -2,9 +2,12 @@
 
 import { ExternalLink, Mail, Phone, Send, User } from "lucide-react"
 import { type ChangeEvent, type FormEvent, useState } from "react"
+import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
 import SplitText from "@/components/SplitText"
+import { Toaster } from "@/components/ui/sonner"
+import { contactSchema, type ContactInput } from "@/lib/validation/contact"
 
 type FormState = {
   name: string
@@ -23,29 +26,54 @@ const initialFormState: FormState = {
 export function Contact() {
   const [form, setForm] = useState<FormState>(initialFormState)
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [status, setStatus] = useState<{
-    type: "idle" | "success" | "error"
-    message: string
-  }>({
-    type: "idle",
-    message: "",
-  })
+  const [hasSubmitted, setHasSubmitted] = useState(false)
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof ContactInput, string>>
+  >({})
+
+  const validateAll = (next: FormState) => {
+    const parsed = contactSchema.safeParse(next)
+    if (parsed.success) return {}
+
+    const nextErrors: Partial<Record<keyof ContactInput, string>> = {}
+    for (const issue of parsed.error.issues) {
+      const key = issue.path[0] as keyof ContactInput | undefined
+      if (key && !nextErrors[key]) nextErrors[key] = issue.message
+    }
+    return nextErrors
+  }
 
   const updateField =
     (field: keyof FormState) =>
     (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      setForm((current) => ({
-        ...current,
-        [field]: event.target.value,
-      }))
+      const value = event.target.value
+      setForm((current) => ({ ...current, [field]: value }))
+
+      if (hasSubmitted) {
+        const inputField = field as keyof ContactInput
+        setErrors((current) => {
+          if (!current[inputField]) return current
+          const next = { ...current }
+          delete next[inputField]
+          return next
+        })
+      }
     }
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    setHasSubmitted(true)
+    const nextErrors = validateAll(form)
+    setErrors(nextErrors)
+    if (Object.keys(nextErrors).length > 0) {
+      toast.error("Please fix the highlighted fields and try again.")
+      return
+    }
+
     setIsSubmitting(true)
-    setStatus({ type: "idle", message: "" })
 
     try {
+      toast.loading("Sending message...", { id: "contact-send" })
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
@@ -61,18 +89,18 @@ export function Contact() {
       }
 
       setForm(initialFormState)
-      setStatus({
-        type: "success",
-        message: data.message ?? "Message sent successfully.",
+      setHasSubmitted(false)
+      setErrors({})
+      toast.success(data.message ?? "Message sent successfully.", {
+        id: "contact-send",
       })
     } catch (error) {
-      setStatus({
-        type: "error",
-        message:
-          error instanceof Error
-            ? error.message
-            : "Something went wrong while sending your message.",
-      })
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong while sending your message.",
+        { id: "contact-send" }
+      )
     } finally {
       setIsSubmitting(false)
     }
@@ -80,6 +108,7 @@ export function Contact() {
 
   return (
     <section id="contact" className="bg-black">
+      <Toaster richColors closeButton />
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mb-10 max-w-3xl">
           <SplitText
@@ -109,7 +138,9 @@ export function Contact() {
                       Email
                     </div>
                     <a
-                      href="mailto:adityamaurya.2807@gmail.com"
+                      href="https://mail.google.com/mail/?view=cm&fs=1&to=adityamaurya.2807@gmail.com"
+                      target="_blank"
+                      rel="noreferrer"
                       className="mt-1 inline-flex items-center gap-2 text-sm text-zinc-200 transition hover:text-white"
                     >
                       adityamaurya.2807@gmail.com
@@ -223,8 +254,16 @@ export function Contact() {
                   onChange={updateField("name")}
                   required
                   placeholder="Your name"
-                  className="w-full rounded-2xl border border-white/10 bg-zinc-900/80 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-cyan-300/40"
+                  aria-invalid={hasSubmitted && Boolean(errors.name)}
+                  className={`w-full rounded-2xl border bg-zinc-900/80 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-cyan-300/40 ${
+                    hasSubmitted && errors.name
+                      ? "border-red-500/60 focus:border-red-500/70"
+                      : "border-white/10"
+                  }`}
                 />
+                {hasSubmitted && errors.name ? (
+                  <p className="mt-1 text-xs text-red-300">{errors.name}</p>
+                ) : null}
               </label>
 
               <label className="block">
@@ -233,13 +272,23 @@ export function Contact() {
                 </span>
                 <input
                   type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
                   name="phone"
                   value={form.phone}
                   onChange={updateField("phone")}
                   required
-                  placeholder="Your phone number"
-                  className="w-full rounded-2xl border border-white/10 bg-zinc-900/80 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-cyan-300/40"
+                  placeholder="+91-8602019492"
+                  aria-invalid={hasSubmitted && Boolean(errors.phone)}
+                  className={`w-full rounded-2xl border bg-zinc-900/80 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-cyan-300/40 ${
+                    hasSubmitted && errors.phone
+                      ? "border-red-500/60 focus:border-red-500/70"
+                      : "border-white/10"
+                  }`}
                 />
+                {hasSubmitted && errors.phone ? (
+                  <p className="mt-1 text-xs text-red-300">{errors.phone}</p>
+                ) : null}
               </label>
             </div>
 
@@ -254,8 +303,16 @@ export function Contact() {
                 onChange={updateField("email")}
                 required
                 placeholder="you@example.com"
-                className="w-full rounded-2xl border border-white/10 bg-zinc-900/80 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-cyan-300/40"
+                aria-invalid={hasSubmitted && Boolean(errors.email)}
+                className={`w-full rounded-2xl border bg-zinc-900/80 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-cyan-300/40 ${
+                  hasSubmitted && errors.email
+                    ? "border-red-500/60 focus:border-red-500/70"
+                    : "border-white/10"
+                }`}
               />
+              {hasSubmitted && errors.email ? (
+                <p className="mt-1 text-xs text-red-300">{errors.email}</p>
+              ) : null}
             </label>
 
             <label className="mt-4 block">
@@ -269,8 +326,16 @@ export function Contact() {
                 required
                 placeholder="Tell me what you want to build."
                 rows={7}
-                className="w-full resize-none rounded-2xl border border-white/10 bg-zinc-900/80 px-4 py-3 text-sm leading-6 text-white outline-none transition placeholder:text-zinc-500 focus:border-cyan-300/40"
+                aria-invalid={hasSubmitted && Boolean(errors.message)}
+                className={`w-full resize-none rounded-2xl border bg-zinc-900/80 px-4 py-3 text-sm leading-6 text-white outline-none transition placeholder:text-zinc-500 focus:border-cyan-300/40 ${
+                  hasSubmitted && errors.message
+                    ? "border-red-500/60 focus:border-red-500/70"
+                    : "border-white/10"
+                }`}
               />
+              {hasSubmitted && errors.message ? (
+                <p className="mt-1 text-xs text-red-300">{errors.message}</p>
+              ) : null}
             </label>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -282,16 +347,6 @@ export function Contact() {
                 {isSubmitting ? "Sending..." : "Send"}
                 <Send className="size-4" />
               </Button>
-
-              {status.type !== "idle" ? (
-                <p
-                  className={`text-sm ${
-                    status.type === "success" ? "text-cyan-300" : "text-red-300"
-                  }`}
-                >
-                  {status.message}
-                </p>
-              ) : null}
             </div>
           </form>
         </div>

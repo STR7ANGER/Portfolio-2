@@ -1,14 +1,8 @@
 import nodemailer from "nodemailer"
 import { NextResponse } from "next/server"
+import { contactSchema } from "@/lib/validation/contact"
 
 export const runtime = "nodejs"
-
-type ContactPayload = {
-  name?: string
-  phone?: string
-  email?: string
-  message?: string
-}
 
 function escapeHtml(value: string) {
   return value
@@ -17,6 +11,88 @@ function escapeHtml(value: string) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;")
+}
+
+function buildSenderConfirmationHtml(params: {
+  safeName: string
+  signatureName: string
+  profileLinks: {
+    linkedin: string
+    github: string
+    leetcode: string
+    x: string
+  }
+}) {
+  const { safeName, signatureName, profileLinks } = params
+
+  const linkStyle = "color:#ffffff;text-decoration:underline"
+
+  return `
+    <div style="margin:0;padding:0;background:#ffffff;">
+      <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">
+        I received your message — I’ll get back to you soon.
+      </div>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#ffffff;margin:0;padding:0;">
+        <tr>
+          <td align="center" style="padding:28px 16px;">
+            <table role="presentation" width="640" cellpadding="0" cellspacing="0" style="width:100%;max-width:640px;border:1px solid #e4e4e7;border-radius:28px;overflow:hidden;background:#000000;">
+              <tr>
+                <td style="padding:26px 26px 0;">
+                  <div style="font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#f4f4f5;">
+                    <div style="letter-spacing:.28em;text-transform:uppercase;font-size:11px;color:#a1a1aa;">
+                      Message received
+                    </div>
+                    <h1 style="margin:10px 0 0;font-size:22px;line-height:1.25;font-weight:650;color:#ffffff;">
+                      Hi ${safeName},
+                    </h1>
+                    <p style="margin:12px 0 0;font-size:14px;line-height:1.75;color:#d4d4d8;">
+                      I received your mail message. Thanks for reaching out — your note is safely in my inbox.
+                    </p>
+                    <p style="margin:12px 0 0;font-size:14px;line-height:1.75;color:#d4d4d8;">
+                      In the meantime, here’s something awesome: I’m currently building and shipping more polished work — you can browse it below while I get back to you.
+                    </p>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:18px 26px 0;">
+                  <div style="font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;">
+                    <div style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#a1a1aa;margin:0 0 10px;">
+                      Check out my profile & work
+                    </div>
+                    <div style="font-size:14px;line-height:1.8;color:#e4e4e7;">
+                      <a href="${profileLinks.linkedin}" target="_blank" rel="noreferrer" style="${linkStyle}">LinkedIn</a>
+                      <span style="color:#52525b;"> · </span>
+                      <a href="${profileLinks.github}" target="_blank" rel="noreferrer" style="${linkStyle}">GitHub</a>
+                      <span style="color:#52525b;"> · </span>
+                      <a href="${profileLinks.leetcode}" target="_blank" rel="noreferrer" style="${linkStyle}">LeetCode</a>
+                      <span style="color:#52525b;"> · </span>
+                      <a href="${profileLinks.x}" target="_blank" rel="noreferrer" style="${linkStyle}">X</a>
+                    </div>
+                    <p style="margin:14px 0 0;font-size:14px;line-height:1.75;color:#d4d4d8;">
+                      We’ll connect soon :)
+                    </p>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:22px 26px 26px;">
+                  <div style="font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;border-top:1px solid #1f1f1f;padding-top:18px;">
+                    <p style="margin:0;font-size:14px;line-height:1.75;color:#e4e4e7;">
+                      Thank you,<br />
+                      ${escapeHtml(signatureName)}
+                    </p>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+  `
 }
 
 function getRequiredEnv(name: string) {
@@ -31,22 +107,21 @@ function getRequiredEnv(name: string) {
 
 export async function POST(request: Request) {
   try {
-    const body = (await request.json()) as ContactPayload
-    const name = body.name?.trim() ?? ""
-    const phone = body.phone?.trim() ?? ""
-    const email = body.email?.trim() ?? ""
-    const message = body.message?.trim() ?? ""
+    const body = (await request.json()) as unknown
+    const parsed = contactSchema.safeParse(body)
+
+    if (!parsed.success) {
+      return NextResponse.json(
+        { error: parsed.error.issues[0]?.message ?? "Invalid input." },
+        { status: 400 }
+      )
+    }
+
+    const { name, phone, email, message } = parsed.data
     const safeName = escapeHtml(name)
     const safePhone = escapeHtml(phone)
     const safeEmail = escapeHtml(email)
     const safeMessage = escapeHtml(message).replace(/\n/g, "<br />")
-
-    if (!name || !phone || !email || !message) {
-      return NextResponse.json(
-        { error: "Please fill out name, phone number, email, and message." },
-        { status: 400 }
-      )
-    }
 
     const ownerEmail = getRequiredEnv("GMAIL_USER")
     const transporter = nodemailer.createTransport({
@@ -100,18 +175,16 @@ export async function POST(request: Request) {
         "",
         "Aditya Maurya",
       ].join("\n"),
-      html: `
-        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111;">
-          <p>Hi ${safeName},</p>
-          <p>Thanks for reaching out through my portfolio. I received your message and will get back to you soon.</p>
-          <div style="margin-top: 20px; padding: 16px; border-radius: 12px; background: #f4f4f5;">
-            <p style="margin: 0 0 8px;"><strong>Your message</strong></p>
-            <p style="margin: 0;">${safeMessage}</p>
-          </div>
-          <p style="margin-top: 20px;">Phone: ${safePhone}<br />Email: ${safeEmail}</p>
-          <p style="margin-top: 20px;">Aditya Maurya</p>
-        </div>
-      `,
+      html: buildSenderConfirmationHtml({
+        safeName,
+        signatureName: "Aditya Maurya",
+        profileLinks: {
+          linkedin: "https://www.linkedin.com/in/adimaurya/",
+          github: "https://github.com/STR7ANGER",
+          leetcode: "https://leetcode.com/Xiafloxy/",
+          x: "https://x.com/AdI0_0I",
+        },
+      }),
     })
 
     return NextResponse.json({
