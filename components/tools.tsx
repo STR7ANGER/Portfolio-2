@@ -1,6 +1,7 @@
 
 import { TweetCard } from "@/components/ui/tweet-card"
 import SplitText from "@/components/SplitText"
+import { BorderBeam } from "@/components/ui/border-beam"
 
 export function Tools() {
   const workInProgress = [
@@ -57,20 +58,24 @@ export function Tools() {
           {workInProgress.map((project) => (
             <article
               key={project.title}
-              className="rounded-xl border border-white/10 bg-zinc-950/90 p-6 shadow-2xl shadow-black/30 transition-colors hover:border-white/20"
+              className="relative overflow-hidden rounded-xl border border-white/10 bg-zinc-950/90 p-6 shadow-2xl shadow-black/30 transition-colors hover:border-white/20"
             >
-              <span className="inline-flex rounded-full border border-white/15 bg-white/5 px-2.5 py-1 text-xs font-medium tracking-wide text-zinc-300">
-                Work in progress
-              </span>
-              <h3 className="mt-4 text-lg font-semibold text-white">
-                {project.title}
-              </h3>
-              <p className="mt-3 text-sm leading-7 text-zinc-400">
-                {project.description}
-              </p>
-              <p className="mt-4 text-xs font-medium uppercase tracking-wider text-zinc-500">
-                {project.tag}
-              </p>
+              <BorderBeam size={120} duration={10} colorFrom="#ffffff" colorTo="#ffffff" />
+
+              <div className="relative z-10">
+                <span className="inline-flex rounded-full border border-white/15 bg-white/5 px-2.5 py-1 text-xs font-medium tracking-wide text-zinc-300">
+                  Work in progress
+                </span>
+                <h3 className="mt-4 text-lg font-semibold text-white">
+                  {project.title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-zinc-400">
+                  {project.description}
+                </p>
+                <p className="mt-4 text-xs font-medium uppercase tracking-wider text-zinc-500">
+                  {project.tag}
+                </p>
+              </div>
             </article>
           ))}
         </div>
