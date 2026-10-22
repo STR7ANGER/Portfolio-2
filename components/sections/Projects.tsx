@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { ExternalLink } from "lucide-react"
 
-import LightPillar from "@/components/fx/LightPillar"
+import { LazyLightPillar } from "@/components/fx/LazyFx"
 import SplitText from "@/components/SplitText"
 import { MagicCard } from "@/components/ui/magic-card"
 import {
@@ -12,51 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-const projects = [
-  {
-    name: "Taskmorpher",
-    image: "/taskmorpher.png",
-    description: "Productivity workspace with task tracking and collaboration.",
-    source: "https://github.com/STR7ANGER/TaskMorpher",
-    live: "https://task-morpher.vercel.app/",
-  },
-  {
-    name: "Job Portal",
-    image: "/jobprotal.png",
-    description:
-      "Job listing and hiring workflow platform for recruiters and candidates.",
-    source: "https://github.com/STR7ANGER/JOB-PORTAL",
-    live: "https://job-portal-green-nu.vercel.app/",
-  },
-  {
-    name: "Virtual Venture",
-    image: "/virtualventure.png",
-    description: "Virtual business and trading simulator with live-style interactions.",
-    source: "https://github.com/STR7ANGER/Virtual_Ventures",
-    live: "https://virtual-ventures.netlify.app/",
-  },
-  {
-    name: "Tech UI",
-    image: "/techui.png",
-    description: "Reusable UI components and design system for modern web apps.",
-    source: "https://github.com/STR7ANGER/UI_Library",
-    live: "https://astonishing-arithmetic-d5066a.netlify.app/",
-  },
-  {
-    name: "Learning Habits",
-    image: "/learninghabit.png",
-    description: "Learning tracker focused on consistency, streaks, and progress insights.",
-    source: "https://github.com/STR7ANGER/Learning-Habits",
-    live: "https://learning-habits-ebon.vercel.app/",
-  },
-  {
-    name: "Bloomify",
-    image: "/bloomify.png",
-    description: "Growth-focused app experience with clean UX and engagement flows.",
-    source: "https://github.com/STR7ANGER/Bloomify",
-    live: "https://bloomify-bay.vercel.app/",
-  },
-]
+import { seoProjects as projects } from "@/lib/site-config"
 
 function GitHubIcon({ className }: { className?: string }) {
   return (
@@ -75,7 +31,7 @@ export function Projects() {
   return (
     <section id="projects" className="relative overflow-hidden bg-black">
       <div className="pointer-events-none absolute inset-0 opacity-45">
-        <LightPillar
+        <LazyLightPillar
           topColor="#ffffff"
           bottomColor="#ffffff"
           intensity={0.2}
@@ -116,9 +72,10 @@ export function Projects() {
               <Card className="overflow-hidden rounded-[2rem] border border-white/10 bg-zinc-950/90 shadow-2xl shadow-black/30">
                 <Image
                   src={project.image}
-                  alt={project.name}
+                  alt={`${project.name} — ${project.description}`}
                   width={640}
                   height={360}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                   className="h-48 w-full object-cover"
                 />
 
@@ -129,7 +86,7 @@ export function Projects() {
                     </CardTitle>
                     <div className="flex items-center gap-3 text-zinc-400">
                       <a
-                        href={project.source}
+                        href={project.repo}
                         target="_blank"
                         rel="noreferrer"
                         aria-label={`${project.name} source code`}
@@ -137,7 +94,7 @@ export function Projects() {
                         <GitHubIcon className="size-4 transition hover:text-white" />
                       </a>
                       <a
-                        href={project.live}
+                        href={project.url}
                         target="_blank"
                         rel="noreferrer"
                         aria-label={`${project.name} live demo`}

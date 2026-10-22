@@ -1,50 +1,25 @@
-type AboutStat = {
-  title: string
-  value: string
-  note: string
-  className?: string
-}
-
-export const aboutStats: AboutStat[] = [
-  {
-    title: "Currently",
-    value: "B.Tech CSE",
-    note: "Cloud Computing at Bennett University · CGPA 8.0",
-    className: "md:col-span-2",
-  },
-  {
-    title: "Impact",
-    value: "5,000+ users",
-    note: "Backends and enterprise modules shipped in production",
-  },
-  {
-    title: "Builder mode",
-    value: "20+ projects",
-    note: "Reusable UI systems, SaaS apps, dashboards, and tooling",
-  },
-  {
-    title: "Cloud + DevOps",
-    value: "AWS · Azure · AKS",
-    note: "CI/CD, containers, deployments, and monitoring",
-  },
-  {
-    title: "Leadership",
-    value: "Research Head",
-    note: "Bennett Cloud Computing Club · mentored 100+ students",
-  },
-]
-
 export const experiences = [
+  {
+    role: "Software Development Engineer Intern",
+    company: "Scaler AI Labs",
+    period: "May 2026 — Present",
+    location: "On-site",
+    bullets: [
+      "Engineered and trained reinforcement learning agents and RL pipelines for 2+ production-grade AI systems in Python and PyTorch.",
+      "Built evaluation harnesses and internal model tooling to benchmark 3+ RL agents across 20+ experiment runs.",
+      "Accelerated performance comparison between agents with repeatable, instrumented training runs.",
+    ],
+  },
   {
     role: "Junior Full-Stack Developer",
     company: "SpectroNOVA",
-    period: "Jul 2025 — Feb 2026",
+    period: "Jul 2025 — Apr 2026",
     location: "Remote",
     bullets: [
       "Built and tested ASP.NET REST APIs and backend microservices supporting 5,000+ active users.",
-      "Improved a product showcase website by fixing client-side issues and raising UI reliability.",
       "Designed CI/CD flows with GitHub Actions and Azure DevOps for automated builds, tests, and deployments.",
-      "Deployed microservices to Azure Kubernetes Service with centralized monitoring.",
+      "Deployed microservices to Azure Kubernetes Service with centralized monitoring and logging.",
+      "Performed API testing with Postman, validating edge cases, error handling, and response consistency.",
     ],
   },
   {
@@ -95,7 +70,7 @@ export const experiences = [
   {
     role: "Frontend Developer Intern",
     company: "Sapphire Broking",
-    period: "Jun 2025 — Mar 2025",
+    period: "Jun 2024 — Mar 2025",
     location: "Remote",
     bullets: [
       "Served as founding frontend developer and built user-facing interfaces from scratch.",
@@ -105,78 +80,20 @@ export const experiences = [
   },
 ] as const
 
-export const projects = [
+export const achievements = [
   {
-    name: "Task Morpher",
-    tag: "Task & Project Management Platform",
-    stack: "Next.js · Supabase · Realtime collaboration · Analytics",
-    description:
-      "A SaaS productivity workspace with live collaboration, rich dashboards, and CI/CD deployment for 500+ users.",
+    title: "Industrial Hackathon Winner",
+    value: "1st place",
+    note: "Won first place among 50+ competing teams in 2024.",
   },
   {
-    name: "Tech.UI",
-    tag: "UI Component Library",
-    stack: "React · Design systems · Reusable components",
-    description:
-      "A component library focused on fast, polished interfaces and reused across 20+ projects.",
+    title: "Competitive Programming",
+    value: "800+ solved",
+    note: "LeetCode problems solved with a 1,650+ contest rating.",
   },
   {
-    name: "Virtual Ventures",
-    tag: "Trading Simulator",
-    stack: "Node.js · Real-time portfolios · Market simulation",
-    description:
-      "Simulates 1,000+ symbols and powers dynamic portfolio tracking for 300+ users.",
+    title: "Research Head — BC3",
+    value: "100+ mentored",
+    note: "Mentored students on cloud and architecture at Bennett Cloud Computing Club.",
   },
-  {
-    name: "Learning Habits",
-    tag: "E-Learning Platform",
-    stack: "MERN · AWS · Stripe · Scalable media delivery",
-    description:
-      "A learning platform with payments, scalable content delivery, and production-ready AWS deployment.",
-  },
-] as const
-
-export const skillGroups = [
-  {
-    title: "Languages",
-    items: ["JavaScript", "TypeScript", "Python", "C++", "C#", "Java", "Go"],
-  },
-  {
-    title: "Frontend",
-    items: ["React", "Next.js", "Vue.js", "Tailwind CSS"],
-  },
-  {
-    title: "Backend & APIs",
-    items: [".NET", "Node.js", "Express", "NestJS", "Django", "GraphQL", "WebSockets"],
-  },
-  {
-    title: "Databases",
-    items: ["PostgreSQL", "MySQL", "SQL Server", "MongoDB", "Redis", "DynamoDB"],
-  },
-] as const
-
-export const toolCards = [
-  {
-    title: "CI/CD pipelines",
-    text: "I build delivery flows with GitHub Actions, Azure DevOps, Docker, and cloud deployments so shipping feels smooth, not scary.",
-  },
-  {
-    title: "Reusable UI systems",
-    text: "Tech.UI reflects how I like to work: one polished design system, reused everywhere, with less repetition and more consistency.",
-  },
-  {
-    title: "API + testing workflows",
-    text: "Postman, DevTools, edge-case testing, and workflow validation are part of my day-to-day build rhythm.",
-  },
-  {
-    title: "Developer automation",
-    text: "From Prisma and Mongoose to infra setup and deployment scripts, I like creating tools that remove boring repetition.",
-  },
-] as const
-
-export const dsaStats = [
-  { label: "LeetCode solved", value: "800+" },
-  { label: "Contest rating", value: "1650+" },
-  { label: "Hackathon finish", value: "#1 place" },
-  { label: "Students mentored", value: "100+" },
 ] as const

@@ -229,6 +229,26 @@ export const TweetMedia = ({ tweet }: { tweet: EnrichedTweet }) => {
   )
 }
 
+/**
+ * The syndication API omits an entity array entirely when a tweet has none of
+ * that kind — a tweet with no @mentions comes back with no `user_mentions`
+ * key at all. react-tweet's enrichTweet() iterates all four unconditionally,
+ * so it throws on those tweets. Backfill the missing ones before enriching.
+ *
+ * `media` is deliberately left alone: enrichTweet already guards it, and an
+ * empty array would read as truthy to the media renderers downstream.
+ */
+const normalizeEntities = (tweet: Tweet): Tweet => ({
+  ...tweet,
+  entities: {
+    ...tweet.entities,
+    hashtags: tweet.entities?.hashtags ?? [],
+    urls: tweet.entities?.urls ?? [],
+    user_mentions: tweet.entities?.user_mentions ?? [],
+    symbols: tweet.entities?.symbols ?? [],
+  },
+})
+
 export const MagicTweet = ({
   tweet,
   className,
@@ -237,7 +257,17 @@ export const MagicTweet = ({
   tweet: Tweet
   className?: string
 }) => {
-  const enrichedTweet = enrichTweet(tweet)
+  let enrichedTweet: EnrichedTweet
+
+  try {
+    enrichedTweet = enrichTweet(normalizeEntities(tweet))
+  } catch (error) {
+    // This renders during the build; degrade to the not-found card rather
+    // than failing the whole prerender on an upstream payload change.
+    console.error(`Could not render tweet ${tweet?.id_str}:`, error)
+    return <TweetNotFound className={className} {...props} />
+  }
+
   return (
     <div
       className={cn(

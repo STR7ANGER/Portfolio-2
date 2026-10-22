@@ -1,5 +1,5 @@
 import { experiences } from "@/components/portfolio-data"
-import LightPillar from "@/components/fx/LightPillar"
+import { LazyLightPillar } from "@/components/fx/LazyFx"
 import SplitText from "@/components/SplitText"
 import { ShineBorder } from "@/components/ui/shine-border"
 
@@ -7,7 +7,7 @@ export function Experience() {
   return (
     <section id="experience" className="relative overflow-hidden bg-black">
       <div className="pointer-events-none absolute inset-0 opacity-45">
-        <LightPillar
+        <LazyLightPillar
           topColor="#ffffff"
           bottomColor="#ffffff"
           intensity={0.2}

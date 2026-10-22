@@ -8,10 +8,12 @@ import {
   MonitorSmartphone,
   Rocket,
   School,
+  Trophy,
 } from "lucide-react"
 
-import DarkVeil from "@/components/fx/DarkVeil"
+import { LazyDarkVeil } from "@/components/fx/LazyFx"
 import SplitText from "@/components/SplitText"
+import { achievements } from "@/components/portfolio-data"
 
 const birthday = {
   day: 28,
@@ -55,7 +57,7 @@ export function About() {
   return (
     <section id="about" className="relative overflow-hidden bg-black">
       <div className="pointer-events-none absolute inset-0 opacity-90 mix-blend-screen blur-[0.5px]">
-        <DarkVeil
+        <LazyDarkVeil
           noiseIntensity={0.12}
           scanlineIntensity={0.35}
           scanlineFrequency={3}
@@ -119,7 +121,10 @@ export function About() {
                   Bennett University
                 </div>
                 <div className="mt-2 text-sm leading-6 text-zinc-400">
-                  2023-2027
+                  B.Tech CSE (Cloud Computing) · 2023-2027
+                </div>
+                <div className="mt-1 text-sm leading-6 text-zinc-400">
+                  CGPA 7.7 / 10.0
                 </div>
               </div>
               <div className="rounded-2xl border border-white/10 bg-zinc-900/80 p-4">
@@ -132,6 +137,10 @@ export function About() {
                 <div className="mt-2 text-sm leading-6 text-zinc-400">PCM + CS</div>
               </div>
             </div>
+            <p className="mt-3 text-xs leading-6 text-zinc-500">
+              Coursework: Data Structures &amp; Algorithms, System Design, DBMS,
+              Cloud Computing.
+            </p>
           </div>
 
           <div className="rounded-[2rem] border border-white/10 bg-zinc-950/90 p-6 shadow-2xl shadow-black/30">
@@ -199,6 +208,31 @@ export function About() {
               {hobbiesAndSports.map((item) => (
                 <div key={item} className="text-sm font-medium text-zinc-200">
                   - {item}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-[2rem] border border-white/10 bg-zinc-950/90 p-6 shadow-2xl shadow-black/30 md:col-span-2 xl:col-span-4">
+            <div className="flex items-center gap-3">
+              <Trophy className="size-5 text-cyan-300" />
+              <div className="text-sm font-medium text-white">Achievements</div>
+            </div>
+            <div className="mt-6 grid gap-3 md:grid-cols-3">
+              {achievements.map((item) => (
+                <div
+                  key={item.title}
+                  className="rounded-2xl border border-white/10 bg-zinc-900/80 p-4"
+                >
+                  <div className="text-xs uppercase tracking-[0.18em] text-zinc-500">
+                    {item.title}
+                  </div>
+                  <div className="mt-2 text-2xl font-semibold text-white">
+                    {item.value}
+                  </div>
+                  <div className="mt-2 text-sm leading-6 text-zinc-400">
+                    {item.note}
+                  </div>
                 </div>
               ))}
             </div>

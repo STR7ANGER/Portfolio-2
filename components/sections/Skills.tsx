@@ -17,7 +17,12 @@ const skillGroups = [
       "REST APIs",
       "GraphQL",
       "WebSockets",
+      "Microservices",
     ],
+  },
+  {
+    title: "ML & AI",
+    items: ["PyTorch", "Reinforcement Learning", "NumPy", "Pandas"],
   },
   {
     title: "Cloud & DevOps",
@@ -34,15 +39,40 @@ const skillGroups = [
   },
   {
     title: "Databases",
-    items: ["PostgreSQL", "MySQL", "SQL Server", "MongoDB", "Redis", "DynamoDB"],
+    items: [
+      "PostgreSQL",
+      "MySQL",
+      "SQL Server",
+      "MongoDB",
+      "Redis",
+      "Cassandra",
+      "DynamoDB",
+    ],
   },
   {
     title: "Frontend",
-    items: ["React", "Next.js", "Vue.js", "Tailwind CSS"],
+    items: [
+      "React",
+      "Next.js",
+      "Vue.js",
+      "Nuxt.js",
+      "Redux",
+      "Zustand",
+      "Tailwind CSS",
+      "Material UI",
+    ],
   },
   {
-    title: "Automation & Tools",
-    items: ["Git", "Bash", "Prisma", "Mongoose", "Entity Framework"],
+    title: "Frameworks & ORM",
+    items: [
+      "Prisma",
+      "TypeORM",
+      "Entity Framework",
+      "LINQ",
+      "Mongoose",
+      "Git",
+      "Bash",
+    ],
   },
   {
     title: "Testing",
@@ -53,6 +83,7 @@ const skillGroups = [
     items: [
       "DSA",
       "System Design",
+      "Distributed Systems",
       "Operating Systems",
       "Computer Networks",
       "DBMS",

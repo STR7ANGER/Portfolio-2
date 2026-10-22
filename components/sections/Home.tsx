@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowRight, Check, Copy } from "lucide-react"
+import { ArrowRight, Check, Copy, Download } from "lucide-react"
 import { motion } from "motion/react"
 import { useState } from "react"
 
@@ -102,6 +102,21 @@ export function Home() {
             >
               Contact
             </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="rounded-full border-white/10 bg-white/5 px-5 text-white hover:bg-white/10"
+            >
+              <a
+                href="/Aditya-Maurya-Resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+                download="Aditya-Maurya-Resume.pdf"
+              >
+                Resume
+                <Download className="size-4" />
+              </a>
+            </Button>
           </motion.div>
         </div>
 
@@ -180,7 +195,7 @@ export function Home() {
               <Link
                 href="https://www.linkedin.com/in/adimaurya"
                 target="_blank"
-                rel="noreferrer"
+                rel="me noreferrer"
                 className="transition hover:text-white"
               >
                 LinkedIn
@@ -188,15 +203,15 @@ export function Home() {
               <Link
                 href="https://github.com/STR7ANGER"
                 target="_blank"
-                rel="noreferrer"
+                rel="me noreferrer"
                 className="transition hover:text-white"
               >
                 GitHub
               </Link>
               <Link
-                href="https://leetcode.com/"
+                href="https://leetcode.com/u/Xiafloxy/"
                 target="_blank"
-                rel="noreferrer"
+                rel="me noreferrer"
                 className="transition hover:text-white"
               >
                 LeetCode
